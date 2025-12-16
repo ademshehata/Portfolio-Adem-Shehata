@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <title>Portfolio - Adem Shehata</title>
     <style>
-        /* Reset et base */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -17,13 +16,38 @@
             color: #e5e7eb;
         }
 
-        /* Conteneur global flex */
         .container {
             display: flex;
             min-height: 100vh;
+            flex-direction: column;
         }
 
-        /* Sidebar menu latéral */
+        header#hero {
+            background: #1e1a3d;
+            padding: 60px 20px;
+            text-align: center;
+            color: #93c5fd;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        header#hero h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        header#hero h3 {
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 2em;
+            color: #22d3ee;
+            letter-spacing: 2px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
         nav.sidebar {
             width: 280px;
             background: linear-gradient(180deg, #1e1a3d 0%, #0f172a 100%);
@@ -31,7 +55,7 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            box-shadow: 3px 0 10px rgba(0,0,0,0.5);
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.5);
         }
 
         nav.sidebar h1 {
@@ -58,6 +82,7 @@
             transition: color 0.3s, font-weight 0.3s;
             padding-left: 10px;
         }
+
         nav.sidebar ul li.active,
         nav.sidebar ul li:hover {
             color: #22d3ee;
@@ -65,7 +90,6 @@
             text-shadow: 0 0 10px #22d3ee;
         }
 
-        /* Section principale */
         main.content {
             flex: 1;
             padding: 60px 40px;
@@ -88,6 +112,7 @@
             color: #22d3ee;
             text-decoration: none;
         }
+
         a:hover {
             text-decoration: underline;
         }
@@ -101,41 +126,46 @@
             box-shadow: inset 0 3px 10px rgba(34,211,238,0.5);
         }
 
-        /* Scrollbar sombre */
         main.content::-webkit-scrollbar {
             width: 8px;
         }
+
         main.content::-webkit-scrollbar-thumb {
             background-color: #22d3ee;
             border-radius: 10px;
         }
+
         main.content::-webkit-scrollbar-track {
             background: #0f172a;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
             }
+
             nav.sidebar {
                 width: 100%;
                 flex-direction: row;
                 justify-content: space-around;
                 padding: 15px 10px;
             }
+
             nav.sidebar h1 {
                 display: none;
             }
+
             nav.sidebar ul {
                 display: flex;
                 width: auto;
             }
+
             nav.sidebar ul li {
                 margin: 0 12px;
                 font-size: 1em;
                 padding-left: 0;
             }
+
             main.content {
                 padding: 20px;
             }
@@ -144,6 +174,11 @@
 </head>
 <body>
 
+<header id="hero">
+    <h1>ADEM SHEHATA</h1>
+    <h3 class="loader">BIENVENUE SUR MON PORTFOLIO</h3>
+</header>
+
 <div class="container">
     <nav class="sidebar">
         <h1>Adem Shehata</h1>
@@ -151,7 +186,7 @@
             <li data-target="accueil" class="active">Accueil</li>
             <li data-target="about">À Propos</li>
             <li data-target="parcours">Parcours</li>
-            <li data-target="competences">Compétences</li> <!-- Positionner Compétences ici -->
+            <li data-target="competences">Compétences</li>
             <li data-target="projets">Projets</li>
             <li data-target="veille">Veille technologique</li>
             <li data-target="documents">Épreuve E4</li>
@@ -174,14 +209,14 @@
             <p>Pas encore attribué.</p>
         </section>
 
-        <section id="competences" style="display:none;"> <!-- Section Compétences -->
+        <section id="competences" style="display:none;">
             <h2>Compétences</h2>
             <ul>
-                <li style="margin-bottom: 15px; font-weight: bold; color: #a5f3fc; cursor:pointer;">HTML / JS</li>
-                <li style="margin-bottom: 15px; font-weight: bold; color: #f97316; cursor:pointer;">MySQL</li>
-                <li style="margin-bottom: 15px; font-weight: bold; color: #a78bfa; cursor:pointer;">Scripts</li>
-                <li style="margin-bottom: 15px; font-weight: bold; color: #f87171; cursor:pointer;">GitHub</li>
-                <li style="margin-bottom: 15px; font-weight: bold; color: #fde68a; cursor:pointer;">Réseau & Systèmes</li>
+                <li>HTML / JS</li>
+                <li>MySQL</li>
+                <li>Scripts</li>
+                <li>GitHub</li>
+                <li>Réseau & Systèmes</li>
             </ul>
         </section>
 
@@ -194,7 +229,7 @@
             <h2>Veille technologique</h2>
             <p>Voici ma veille technologique</p>
         </section>
-        
+
         <section id="documents" style="display:none;">
             <h2>Documents</h2>
             <p>
@@ -212,17 +247,13 @@
 </footer>
 
 <script>
-    // Gestion du menu pour afficher une seule section à la fois
     const menuItems = document.querySelectorAll('#menu li');
     const sections = document.querySelectorAll('main.content section');
 
     menuItems.forEach(item => {
         item.addEventListener('click', () => {
-            // Retirer la classe active sur tous les items
             menuItems.forEach(i => i.classList.remove('active'));
-            // Ajouter active sur l'item cliqué
             item.classList.add('active');
-
             const targetId = item.getAttribute('data-target');
             sections.forEach(sec => {
                 if (sec.id === targetId) {
